@@ -4,7 +4,7 @@ import pino from 'pino-http';
 
 import { env } from './utils/env.js';
 
-import contactsRouter from './routers/contacts.js';
+import router from './routers/contacts.js';
 
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
@@ -23,7 +23,7 @@ export const setupServer = () => {
 
   // app.use(logger);
 
-  app.use('/contacts', contactsRouter);
+  app.use('/contacts', router);
 
   app.use(notFoundHandler);
 
