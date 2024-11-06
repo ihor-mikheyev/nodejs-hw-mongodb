@@ -19,10 +19,12 @@ export const updateContact = async ({ _id, payload, options = {} }) => {
 
   return {
     data: data.value,
-    isNew: Boolean(data.lastErrorObject.upserted),
+    isNew: Boolean(data?.lastErrorObject?.upserted),
   };
 };
 
 export const deleteContact = async (filter) => {
-  return ContactsCollection.findByIdAndDelete(filter);
+  return ContactsCollection.findByIdAndDelete({
+    _id: filter,
+  });
 };
