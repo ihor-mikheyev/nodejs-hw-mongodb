@@ -15,7 +15,7 @@ export const contactAddSchema = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 1 })
     .messages({ 'any.required': `Please input an email` }),
-  isFarourite: Joi.boolean(),
+  isFavourite: Joi.boolean(),
   contactType: Joi.string().valid(...CONTACT_TYPE_LIST),
 });
 
@@ -23,6 +23,6 @@ export const contactUpdateSchema = Joi.object({
   name: Joi.string().min(3).max(20),
   phoneNumber: Joi.string().min(3).max(20),
   email: Joi.string().email({ minDomainSegments: 1 }),
-  isFarourite: Joi.boolean(),
+  isFavourite: Joi.boolean(),
   contactType: Joi.string().valid(...CONTACT_TYPE_LIST),
 });
