@@ -5,7 +5,9 @@ import pino from 'pino-http';
 import { env } from './utils/env.js';
 
 import router from './routers/contacts.js';
+import authRouter from './routers/auth.js';
 
+import cookieParser from 'cookie-parser';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
@@ -18,11 +20,11 @@ export const setupServer = () => {
       target: 'pino-pretty',
     },
   });
-
+  app.use(cookieParser());
   app.use(express.json());
 
   // app.use(logger);
-
+  app.use('/auth', authRouter);
   app.use('/contacts', router);
 
   app.use(notFoundHandler);
