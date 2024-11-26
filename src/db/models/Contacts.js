@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { Schema, model } from 'mongoose';
 import { CONTACT_TYPE_LIST } from '../../constants/contacts.js';
 
@@ -27,7 +28,7 @@ const contactSchema = new Schema(
       default: 'personal',
     },
     userId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
       required: true,
     },

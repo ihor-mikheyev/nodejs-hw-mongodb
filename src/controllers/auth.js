@@ -10,11 +10,13 @@ import {
 } from '../constants/users.js';
 
 export const singUpController = async (req, res) => {
-  const data = await authServices.singUp(req.body);
+  const user = await authServices.singUp(req.body);
 
+  // const { password, ...rest } = user;
   res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
+    data: user,
   });
 };
 
@@ -36,7 +38,7 @@ export const singInController = async (req, res) => {
   res.json({
     status: 200,
     message: 'Successfully logged in an user!',
-    data: accessToken,
+    data: { accessToken: accessToken },
   });
 };
 

@@ -5,7 +5,7 @@ export const handleSaveError = (error, data, next) => {
 };
 
 export const setUpdateSettings = function (next) {
-  this.option.runValidators = true;
-  this.option.new = true;
+  this.options.runValidators = true;
+  this.options.new = true;
   next();
 };
