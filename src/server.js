@@ -11,6 +11,8 @@ import cookieParser from 'cookie-parser';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
+import { UPLOAD_DIR } from './constants/index.js';
+
 export const setupServer = () => {
   const app = express();
 
@@ -30,6 +32,8 @@ export const setupServer = () => {
   app.use(notFoundHandler);
 
   app.use(errorHandler);
+
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
   const port = Number(env('PORT', 3000));
   app.listen(port, () => console.log(`Server running on ${port} PORT`));
