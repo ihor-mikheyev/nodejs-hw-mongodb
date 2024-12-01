@@ -12,6 +12,7 @@ import {
 
 import jwt from 'jsonwebtoken';
 import { SMTP } from '../constants/index.js';
+import { TEMPLATES_DIR } from '../constants/index.js';
 import { env } from '../utils/env.js';
 import { sendEmail } from '../utils/sendMail.js';
 
@@ -101,6 +102,7 @@ export const requestResetToken = async (email) => {
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
+
   const resetToken = jwt.sign(
     {
       sub: user._id,
@@ -135,7 +137,7 @@ export const requestResetToken = async (email) => {
       subject: 'Reset your password',
       html,
     });
-  } catch (error) {
+  } catch {
     throw createHttpError(
       500,
       'Failed to send the email, please try again later.',
@@ -143,13 +145,14 @@ export const requestResetToken = async (email) => {
   }
 };
 
-export const resetPassword = async (payload) => {
+export const resetPassword = async (payload, sessionId) => {
   let entries;
 
   try {
     entries = jwt.verify(payload.token, env('JWT_SECRET'));
   } catch (err) {
-    if (err instanceof Error) throw createHttpError(401, err.message);
+    if (err instanceof Error)
+      throw createHttpError(401, 'Token is expired or invalid.');
     throw err;
   }
   const user = await UserCollection.findOne({
@@ -164,4 +167,6 @@ export const resetPassword = async (payload) => {
     { _id: user.id },
     { password: encryptedPassword },
   );
+
+  await SessionCollection.deleteOne({ _id: sessionId });
 };
