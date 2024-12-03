@@ -23,8 +23,9 @@ export const setupServer = () => {
       target: 'pino-pretty',
     },
   });
-  app.use(cookieParser());
+
   app.use(express.json());
+  app.use(cookieParser());
 
   app.use('/uploads', express.static(UPLOAD_DIR));
   app.use('/api-docs', swaggerDocs());
