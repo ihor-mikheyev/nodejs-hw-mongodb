@@ -161,10 +161,11 @@ export const resetPassword = async (payload, sessionId) => {
   });
 
   if (!user) throw createHttpError(404, 'User not found');
+
   const encryptedPassword = await bcrypt.hash(payload.password, 10);
 
   await UserCollection.updateOne(
-    { _id: user.id },
+    { _id: user._id },
     { password: encryptedPassword },
   );
 
