@@ -13,14 +13,6 @@ parameters:
       type: string
       example: '65ca67e7ae7f10c88b598384'
     description: 'Successfully patched a contact!'
-    content:
-      application/json:
-        schema:
-          type: object
-          required:
-            - status
-            - message
-            - data
 requestBody:
   content:
     multipart/form-data:
