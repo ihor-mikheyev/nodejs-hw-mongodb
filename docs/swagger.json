@@ -201,8 +201,34 @@
                   },
                   "phoneNumber": {
                     "description": "Contact's phone number",
-                    "type": "number",
-                    "example": 12
+                    "type": "string",
+                    "example": "+3801234567890"
+                  },
+                  "email": {
+                    "description": "Contact's email",
+                    "type": "string",
+                    "example": "example@gmail.com"
+                  },
+                  "isFavourite": {
+                    "description": "Contact is favourite or not",
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "contactType": {
+                    "description": "Type of the contact",
+                    "type": "string",
+                    "enum": [
+                      "work",
+                      "home",
+                      "personal"
+                    ],
+                    "default": "personal",
+                    "example": "personal"
+                  },
+                  "photo": {
+                    "description": "Contact's photo",
+                    "type": "string",
+                    "format": "binary"
                   }
                 }
               }
